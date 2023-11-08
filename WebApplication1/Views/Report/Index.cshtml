@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+
+
+
+<section class="content">
+    @* <div class="container-fluid">
+        <div class="row">*@
+    <div class="col-md-12">
+
+        <div class="card card-primary">
+            @*<div><h3 class="card-title"><b>@Session["Orgname"]</b></h3></div><br />*@
+            <div class="card-header">
+                <h3 class="card-title">Please Enter Report Parameters:</h3>
+            </div>
+
+            <form autocomplete="off">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="control-label">Please select Report:</label>
+                            @Html.DropDownList("ReportNames", null, null, new { @class = "form-control", id = "Report", name = "Report" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label">Enter Start Date:</label>
+                                <input type="date" class="form-control" id="datepicker1" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Enter End Date:</label>
+                                <input type="date" class="form-control" id="datepicker2" required />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label">Please select Report Format:</label>
+                                @Html.DropDownList("ReportFormat", null, null, new { @class = "form-control", id = "ReportFormat", name = "ReportFormat" })
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12" id="Budgetdiv">
+                                    <label class="control-label">Please select Budget Scenario ID:</label>
+                                    @Html.DropDownList("Budget", null, null, new { @class = "form-control", id = "BudgetScenario", name = "BudgetScenario" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12" id="projectId">
+                                    <label class="control-label">Please select Project IDs:</label>
+                                    @Html.DropDownList("Project", null, new { @class = "form-control", id = "Project", name = "Project" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12" id="departmentId">
+                                        <label class="control-label">Please select Department IDs:</label>
+                                        @Html.DropDownList("Deparment", null, new { @class = "form-control", id = "Deparment", name = "Deparment" })
+                                    </div>
+                                </div>
+                            </div>*@
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary" style="margin-top:25px;" id="search">Generate Report</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+@section scripts{
+    <script src="~/Content/select2/js/select2.min.js"></script>
+    <script>
+
+        $(function () {
+           // $('#departmentId').prop('hidden', true);
+            $('#Project').select2({ multiple: true });
+            $('#Deparment').select2({ multiple: true });
+        });
+
+        $("#search").click(function (e) {
+            var _text = $("#Report :selected").text();
+            if ($.trim($("#datepicker1").val()) == "") {
+                alert("Kindly select the Start Date");
+                $("#datepicker1").focus();
+                return;
+            }
+            if ($.trim($("#datepicker2").val()) == "") {
+                alert("Kindly select the End Date");
+                $("#datepicker2").focus();
+                return;
+            }
+            else if ($.trim($("#Report :selected").val()) == "") {
+                alert("Kindly select the ReportName");
+                $("#Report").focus();
+                return;
+            }
+            else if ($.trim($("#ReportFormat :selected").val()) == "") {
+                alert("Kindly select the ReportFormat");
+                $("#ReportFormat").focus();
+                return;
+            }
+
+            e.preventDefault();
+            var start = $("#datepicker1").val();
+            var end = $("#datepicker2").val();
+            var ProjectID = $("#Project").val();
+         
+            var BudgetScenarioID = $("#BudgetScenario").val();
+            var report = $("#Report :selected").text();
+            var reportFormat = $("#ReportFormat :selected").text();
+
+            //window.location.href = "/Home/ExportReport?StartDate=" + start + "&EndDate=" + end + "&ProjectID=" + ProjectID + "&BudgetScenarioID=" + BudgetScenarioID + "&Report=" + report + "&ReportFormat=" + reportFormat;// + "&Deparment=" + Deparment;
+            window.location.href = "/Report/ExportProjects?Report=" + report + "&ReportFormat=" + reportFormat;
+        })
+
+    </script>
+
+}
