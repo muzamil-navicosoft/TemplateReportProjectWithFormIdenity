@@ -1,0 +1,236 @@
+﻿CREATE DATABASE MVC5
+GO
+USE MVC5
+GO
+-- Creating Employee table
+CREATE TABLE Employee
+(
+ ID INT PRIMARY KEY IDENTITY(1,1),
+ Name VARCHAR(50),
+ Designation VARCHAR(50),
+ Salary INT
+)
+-- Creating Sale table
+CREATE TABLE Sale
+(
+ ID INT PRIMARY KEY IDENTITY(1,1),
+ Name VARCHAR(50),
+ Product VARCHAR(50),
+ Quantity INT,
+ Price  INT
+)
+-- Creating Users table
+CREATE TABLE Users
+(
+ ID INT PRIMARY KEY IDENTITY(1,1),
+ UserName VARCHAR(50),
+ UserPassword VARCHAR(50)
+)
+-- Creating RoleMaster Table
+CREATE TABLE Roles
+(
+ ID INT PRIMARY KEY IDENTITY(1,1),
+ RollName VARCHAR(50)
+)
+-- Creating User Roles Mapping table
+CREATE TABLE UserRolesMapping
+(
+ ID INT PRIMARY KEY,
+ UserID INT NOT NULL,
+ RoleID INT NOT NULL,
+)
+-- Adding Foreign KeyS 
+ALTER TABLE UserRolesMapping
+ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
+ALTER TABLE UserRolesMapping
+ADD FOREIGN KEY (RoleID) REFERENCES Roles(ID);
+
+
+-- Inserting data into Employee table
+INSERT INTO Employee VALUES('John Doe', 'Manager', 60000);
+INSERT INTO Employee VALUES('Jane Smith', 'Developer', 50000);
+INSERT INTO Employee VALUES('Michael Johnson', 'Tester', 45000);
+INSERT INTO Employee VALUES('Emily Davis', 'Designer', 48000);
+INSERT INTO Employee VALUES('David Brown', 'Analyst', 55000);
+INSERT INTO Employee VALUES('Jessica Lee', 'Engineer', 52000);
+INSERT INTO Employee VALUES('Chris Wilson', 'Administrator', 47000);
+INSERT INTO Employee VALUES('Sarah Taylor', 'Programmer', 51000);
+INSERT INTO Employee VALUES('Matthew Clark', 'Consultant', 60000);
+INSERT INTO Employee VALUES('Amanda Rodriguez', 'Support Specialist', 43000);
+INSERT INTO Employee VALUES('James Martinez', 'System Administrator', 58000);
+INSERT INTO Employee VALUES('Jennifer Robinson', 'Database Administrator', 56000);
+INSERT INTO Employee VALUES('Daniel Harris', 'Network Engineer', 57000);
+INSERT INTO Employee VALUES('Lisa King', 'Project Manager', 62000);
+INSERT INTO Employee VALUES('Robert White', 'Business Analyst', 59000);
+INSERT INTO Employee VALUES('Michelle Lewis', 'Product Manager', 63000);
+INSERT INTO Employee VALUES('William Young', 'Technical Writer', 49000);
+INSERT INTO Employee VALUES('Kimberly Turner', 'Sales Representative', 45000);
+INSERT INTO Employee VALUES('Brian Moore', 'Marketing Specialist', 47000);
+INSERT INTO Employee VALUES('Laura Jackson', 'Customer Service Representative', 43000);
+INSERT INTO Employee VALUES('Steven Harris', 'Financial Analyst', 55000);
+INSERT INTO Employee VALUES('Melissa Nelson', 'HR Coordinator', 48000);
+INSERT INTO Employee VALUES('Kevin Adams', 'Recruiter', 50000);
+INSERT INTO Employee VALUES('Patricia Hall', 'Trainer', 49000);
+INSERT INTO Employee VALUES('Edward Baker', 'Quality Assurance Analyst', 52000);
+INSERT INTO Employee VALUES('Susan Turner', 'Content Writer', 46000);
+INSERT INTO Employee VALUES('George Thomas', 'Data Analyst', 54000);
+INSERT INTO Employee VALUES('Karen Mitchell', 'UX Designer', 52000);
+INSERT INTO Employee VALUES('Paul Perez', 'UI Developer', 53000);
+INSERT INTO Employee VALUES('Donna Scott', 'Front-end Developer', 51000);
+INSERT INTO Employee VALUES('Charles Anderson', 'Back-end Developer', 53000);
+INSERT INTO Employee VALUES('Deborah Green', 'Full-stack Developer', 55000);
+INSERT INTO Employee VALUES('Ronald Evans', 'DevOps Engineer', 58000);
+INSERT INTO Employee VALUES('Margaret Murphy', 'Scrum Master', 57000);
+INSERT INTO Employee VALUES('Joseph Rivera', 'Product Owner', 59000);
+INSERT INTO Employee VALUES('Betty Parker', 'UX Researcher', 52000);
+INSERT INTO Employee VALUES('Dennis Cooper', 'IT Support Specialist', 45000);
+INSERT INTO Employee VALUES('Pamela Ward', 'System Analyst', 54000);
+INSERT INTO Employee VALUES('Frances Gonzalez', 'Technical Consultant', 60000);
+INSERT INTO Employee VALUES('Jerry Hall', 'Database Developer', 51000);
+INSERT INTO Employee VALUES('Kathryn Long', 'Network Administrator', 56000);
+INSERT INTO Employee VALUES('Raymond Foster', 'Project Coordinator', 48000);
+INSERT INTO Employee VALUES('Gloria Sanders', 'Business Development Manager', 59000);
+INSERT INTO Employee VALUES('Bobby Brooks', 'Account Manager', 55000);
+INSERT INTO Employee VALUES('Janet Coleman', 'Accountant', 52000);
+INSERT INTO Employee VALUES('Harry Howard', 'Financial Advisor', 58000);
+INSERT INTO Employee VALUES('Nicole Perry', 'Legal Counsel', 60000);
+INSERT INTO Employee VALUES('Samuel Simmons', 'Research Analyst', 54000);
+INSERT INTO Employee VALUES('Cynthia Powell', 'Marketing Manager', 57000);
+INSERT INTO Employee VALUES('Andrew Russell', 'Sales Manager', 59000);
+INSERT INTO Employee VALUES('Helen Reed', 'Customer Success Manager', 55000);
+INSERT INTO Employee VALUES('Richard Wood', 'Operations Manager', 58000);
+INSERT INTO Employee VALUES('Alyssa Butler', 'Product Marketing Manager', 59000);
+INSERT INTO Employee VALUES('Douglas Cox', 'Content Manager', 54000);
+INSERT INTO Employee VALUES('Tina Diaz', 'HR Manager', 56000);
+INSERT INTO Employee VALUES('Randy Simmons', 'Recruitment Manager', 57000);
+INSERT INTO Employee VALUES('Geraldine Hayes', 'Training Manager', 58000);
+INSERT INTO Employee VALUES('Russell Thompson', 'Quality Assurance Manager', 59000);
+INSERT INTO Employee VALUES('Ruth Cox', 'Compliance Manager', 60000);
+INSERT INTO Employee VALUES('Phillip Cook', 'Security Manager', 60000);
+INSERT INTO Employee VALUES('Marie Clark', 'Public Relations Manager', 59000);
+INSERT INTO Employee VALUES('Harold Mitchell', 'Supply Chain Manager', 58000);
+INSERT INTO Employee VALUES('Kathleen Rodriguez', 'Logistics Manager', 57000);
+INSERT INTO Employee VALUES('Carl Turner', 'Warehouse Manager', 56000);
+INSERT INTO Employee VALUES('Judith Carter', 'Production Manager', 55000);
+INSERT INTO Employee VALUES('Howard Williams', 'Quality Control Manager', 54000);
+INSERT INTO Employee VALUES('Marilyn Adams', 'Inventory Manager', 53000);
+INSERT INTO Employee VALUES('Jason Lewis', 'Purchasing Manager', 52000);
+INSERT INTO Employee VALUES('Betty Jackson', 'Distribution Manager', 51000);
+INSERT INTO Employee VALUES('Anthony Harris', 'Operations Supervisor', 50000);
+INSERT INTO Employee VALUES('Norma Martin', 'Customer Service Supervisor', 49000);
+INSERT INTO Employee VALUES('Philip Martinez', 'Financial Analyst', 48000);
+INSERT INTO Employee VALUES('Gloria Davis', 'Accounting Clerk', 47000);
+INSERT INTO Employee VALUES('Douglas Smith', 'Administrative Assistant', 46000);
+INSERT INTO Employee VALUES('Diane Hernandez', 'Data Entry Clerk', 45000);
+INSERT INTO Employee VALUES('Samuel Young', 'Receptionist', 44000);
+INSERT INTO Employee VALUES('Evelyn Lewis', 'Office Manager', 43000);
+INSERT INTO Employee VALUES('Bruce Thompson', 'Executive Assistant', 42000);
+INSERT INTO Employee VALUES('Debra Lewis', 'Marketing Coordinator', 41000);
+INSERT INTO Employee VALUES('Ryan Harris', 'Sales Associate', 40000);
+INSERT INTO Employee VALUES('Ella Scott', 'Customer Support Representative', 39000);
+INSERT INTO Employee VALUES('Carlos Gonzalez', 'Technical Support Specialist', 38000);
+INSERT INTO Employee VALUES('Mary Adams', 'Human Resources Assistant', 37000);
+INSERT INTO Employee VALUES('Aaron Hernandez', 'Recruitment Coordinator', 36000);
+INSERT INTO Employee VALUES('Diana Johnson', 'Training Coordinator', 35000);
+INSERT INTO Employee VALUES('Peter Davis', 'Quality Assurance Tester', 34000);
+INSERT INTO Employee VALUES('Lisa Rodriguez', 'Inventory Control Specialist', 33000);
+INSERT INTO Employee VALUES('John Turner', 'Purchasing Assistant', 32000);
+INSERT INTO Employee VALUES('Christine Lee', 'Distribution Coordinator' 45000);
+
+-- Inserting data into Users table
+INSERT INTO Users VALUES('Admin','admin');
+INSERT INTO Users VALUES('User','user');
+
+-- Inserting data into Role Master table
+INSERT INTO Roles VALUES('Admin');
+INSERT INTO Roles VALUES('Report');
+
+-- Inserting data into User Roll Mapping table
+INSERT INTO UserRolesMapping VALUES(1, 1, 1)
+INSERT INTO UserRolesMapping VALUES(2, 1, 2)
+INSERT INTO UserRolesMapping VALUES(3, 2, 2)
+
+
+-- Inserting data into Sale table
+
+INSERT INTO Sale VALUES('John Doe', 'Product A', 10, 100);
+INSERT INTO Sale VALUES('Jane Smith', 'Product B', 5, 200);
+INSERT INTO Sale VALUES('Michael Johnson', 'Product C', 8, 150);
+INSERT INTO Sale VALUES('Emily Davis', 'Product D', 12, 120);
+INSERT INTO Sale VALUES('David Brown', 'Product E', 6, 180);
+INSERT INTO Sale VALUES('Jessica Lee', 'Product F', 9, 160);
+INSERT INTO Sale VALUES('Chris Wilson', 'Product G', 7, 170);
+INSERT INTO Sale VALUES('Sarah Taylor', 'Product H', 15, 90);
+INSERT INTO Sale VALUES('Matthew Clark', 'Product I', 20, 75);
+INSERT INTO Sale VALUES('Amanda Rodriguez', 'Product J', 3, 250);
+INSERT INTO Sale VALUES('James Martinez', 'Product K', 4, 220);
+INSERT INTO Sale VALUES('Jennifer Robinson', 'Product L', 6, 180);
+INSERT INTO Sale VALUES('Daniel Harris', 'Product M', 11, 110);
+INSERT INTO Sale VALUES('Lisa King', 'Product N', 10, 100);
+INSERT INTO Sale VALUES('Robert White', 'Product O', 8, 150);
+INSERT INTO Sale VALUES('Michelle Lewis', 'Product P', 5, 200);
+INSERT INTO Sale VALUES('William Young', 'Product Q', 9, 160);
+INSERT INTO Sale VALUES('Kimberly Turner', 'Product R', 12, 120);
+INSERT INTO Sale VALUES('Brian Moore', 'Product S', 7, 170);
+INSERT INTO Sale VALUES('Laura Jackson', 'Product T', 10, 100);
+INSERT INTO Sale VALUES('Steven Harris', 'Product U', 14, 100);
+INSERT INTO Sale VALUES('Melissa Nelson', 'Product V', 16, 90);
+INSERT INTO Sale VALUES('Kevin Adams', 'Product W', 6, 180);
+INSERT INTO Sale VALUES('Patricia Hall', 'Product X', 8, 150);
+INSERT INTO Sale VALUES('Edward Baker', 'Product Y', 13, 110);
+INSERT INTO Sale VALUES('Susan Turner', 'Product Z', 9, 160);
+INSERT INTO Sale VALUES('George Thomas', 'Product AA', 10, 100);
+INSERT INTO Sale VALUES('Karen Mitchell', 'Product BB', 11, 100);
+INSERT INTO Sale VALUES('Paul Perez', 'Product CC', 12, 100);
+INSERT INTO Sale VALUES('Donna Scott', 'Product DD', 14, 100);
+INSERT INTO Sale VALUES('Charles Anderson', 'Product EE', 15, 100);
+INSERT INTO Sale VALUES('Deborah Green', 'Product FF', 16, 100);
+INSERT INTO Sale VALUES('Ronald Evans', 'Product GG', 18, 100);
+INSERT INTO Sale VALUES('Margaret Murphy', 'Product HH', 20, 100);
+INSERT INTO Sale VALUES('Joseph Rivera', 'Product II', 5, 200);
+INSERT INTO Sale VALUES('Betty Parker', 'Product JJ', 8, 150);
+INSERT INTO Sale VALUES('Dennis Cooper', 'Product KK', 12, 120);
+INSERT INTO Sale VALUES('Pamela Ward', 'Product LL', 10, 100);
+INSERT INTO Sale VALUES('Frances Gonzalez', 'Product MM', 15, 100);
+INSERT INTO Sale VALUES('Jerry Hall', 'Product NN', 6, 180);
+INSERT INTO Sale VALUES('Kathryn Long', 'Product OO', 9, 160);
+INSERT INTO Sale VALUES('Raymond Foster', 'Product PP', 11, 110);
+INSERT INTO Sale VALUES('Gloria Sanders', 'Product QQ', 8, 150);
+INSERT INTO Sale VALUES('Bobby Brooks', 'Product RR', 10, 100);
+INSERT INTO Sale VALUES('Janet Coleman', 'Product SS', 14, 100);
+INSERT INTO Sale VALUES('Harry Howard', 'Product TT', 16, 90);
+INSERT INTO Sale VALUES('Nicole Perry', 'Product UU', 12, 120);
+INSERT INTO Sale VALUES('Samuel Simmons', 'Product VV', 7, 170);
+INSERT INTO Sale VALUES('Cynthia Powell', 'Product WW', 9, 160);
+INSERT INTO Sale VALUES('Andrew Russell', 'Product XX', 10, 100);
+INSERT INTO Sale VALUES('Helen Reed', 'Product YY', 8, 150);
+INSERT INTO Sale VALUES('Richard Wood', 'Product ZZ', 6, 180);
+INSERT INTO Sale VALUES('Alyssa Butler', 'Product AAA', 10, 100);
+INSERT INTO Sale VALUES('Douglas Cox', 'Product BBB', 11, 100);
+INSERT INTO Sale VALUES('Tina Diaz', 'Product CCC', 12, 100);
+INSERT INTO Sale VALUES('Randy Simmons', 'Product DDD', 15, 100);
+INSERT INTO Sale VALUES('Geraldine Hayes', 'Product EEE', 16, 100);
+INSERT INTO Sale VALUES('Russell Thompson', 'Product FFF', 14, 100);
+INSERT INTO Sale VALUES('Ruth Cox', 'Product GGG', 13, 110);
+INSERT INTO Sale VALUES('Phillip Cook', 'Product HHH', 12, 120);
+INSERT INTO Sale VALUES('Marie Clark', 'Product III', 10, 100);
+INSERT INTO Sale VALUES('Harold Mitchell', 'Product JJJ', 9, 160);
+INSERT INTO Sale VALUES('Kathleen Rodriguez', 'Product KKK', 8, 150);
+INSERT INTO Sale VALUES('Carl Turner', 'Product LLL', 7, 170);
+INSERT INTO Sale VALUES('Judith Carter', 'Product MMM', 6, 180);
+INSERT INTO Sale VALUES('Howard Williams', 'Product NNN', 5, 200);
+INSERT INTO Sale VALUES('Marilyn Adams', 'Product OOO', 4, 220);
+INSERT INTO Sale VALUES('Jason Lewis', 'Product PPP', 3, 250);
+INSERT INTO Sale VALUES('Betty Jackson', 'Product QQQ', 2, 280);
+INSERT INTO Sale VALUES('Anthony Harris', 'Product RRR', 1, 300);
+INSERT INTO Sale VALUES('Norma Martin', 'Product SSS', 5, 200);
+INSERT INTO Sale VALUES('Philip Martinez', 'Product TTT', 7, 170);
+INSERT INTO Sale VALUES('Gloria Davis', 'Product UUU', 9, 160);
+INSERT INTO Sale VALUES('Douglas Smith', 'Product VVV', 11, 110);
+INSERT INTO Sale VALUES('Diane Hernandez', 'Product WWW', 13, 100);
+INSERT INTO Sale VALUES('Samuel Young', 'Product XXX', 15, 90);
+INSERT INTO Sale VALUES('Evelyn Lewis', 'Product YYY', 17, 80);
+INSERT INTO Sale VALUES('Bruce Thompson', 'Product ZZZ', 19, 70);
+INSERT INTO Sale VALUES('Debra Lewis', 'Product AAAA', 20, 65);
+INSERT INTO Sale VALUES('Ryan Harris', 'Product BBBB', 18, 75);
+
