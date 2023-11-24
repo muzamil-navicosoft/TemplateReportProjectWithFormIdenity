@@ -35,7 +35,7 @@ CREATE TABLE Roles
 -- Creating User Roles Mapping table
 CREATE TABLE UserRolesMapping
 (
- ID INT PRIMARY KEY,
+ ID INT PRIMARY KEY IDENTITY(1,1),
  UserID INT NOT NULL,
  RoleID INT NOT NULL,
 )
@@ -135,20 +135,19 @@ INSERT INTO Employee VALUES('Diana Johnson', 'Training Coordinator', 35000);
 INSERT INTO Employee VALUES('Peter Davis', 'Quality Assurance Tester', 34000);
 INSERT INTO Employee VALUES('Lisa Rodriguez', 'Inventory Control Specialist', 33000);
 INSERT INTO Employee VALUES('John Turner', 'Purchasing Assistant', 32000);
-INSERT INTO Employee VALUES('Christine Lee', 'Distribution Coordinator' 45000);
+INSERT INTO Employee VALUES('Christine Lee', 'Distribution Coordinator', 45000);
 
 -- Inserting data into Users table
 INSERT INTO Users VALUES('Admin','admin');
-INSERT INTO Users VALUES('User','user');
+
 
 -- Inserting data into Role Master table
 INSERT INTO Roles VALUES('Admin');
 INSERT INTO Roles VALUES('Report');
 
 -- Inserting data into User Roll Mapping table
-INSERT INTO UserRolesMapping VALUES(1, 1, 1)
-INSERT INTO UserRolesMapping VALUES(2, 1, 2)
-INSERT INTO UserRolesMapping VALUES(3, 2, 2)
+INSERT INTO UserRolesMapping VALUES(1, 1)
+
 
 
 -- Inserting data into Sale table

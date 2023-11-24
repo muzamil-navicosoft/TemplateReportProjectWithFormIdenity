@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
@@ -47,7 +47,7 @@
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="UserPassword" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__UserRoles__RoleI__3E52440B">
+        <Association Name="FK__UserRoles__RoleI__3F466844">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
           <ReferentialConstraint>
@@ -59,7 +59,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__3D5E1FD2">
+        <Association Name="FK__UserRoles__UserI__3E52440B">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
           <ReferentialConstraint>
@@ -77,11 +77,11 @@
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRolesMapping" EntityType="Self.UserRolesMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__UserRoles__RoleI__3E52440B" Association="Self.FK__UserRoles__RoleI__3E52440B">
+          <AssociationSet Name="FK__UserRoles__RoleI__3F466844" Association="Self.FK__UserRoles__RoleI__3F466844">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__3D5E1FD2" Association="Self.FK__UserRoles__UserI__3D5E1FD2">
+          <AssociationSet Name="FK__UserRoles__UserI__3E52440B" Association="Self.FK__UserRoles__UserI__3E52440B">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
           </AssociationSet>

@@ -11,6 +11,7 @@ namespace WebApplication1.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        ProjectContext context = new ProjectContext();
         public ActionResult Login()
         {
             return View();
@@ -31,19 +32,37 @@ namespace WebApplication1.Controllers
                 return View();
             }
         }
-
+        public ActionResult list()
+        {
+            List<User> users = new List<User>();
+            users = context.Users.ToList();
+            
+            return View(users);
+        }
         public ActionResult Signup()
         {
+            var list = context.Roles.ToList();
+            ViewBag.roles = new SelectList(list, "ID", "RollName");
             return View();
         }
         [HttpPost]
-        public ActionResult Signup(User model)
+        public ActionResult Signup(UserModelWithRole model)
         {
-            using (ProjectContext context = new ProjectContext())
+            User use = new User()
             {
-                context.Users.Add(model);
-                context.SaveChanges();
-            }
+                UserName = model.UserName,
+                UserPassword = model.UserPassword
+            };
+            var result =  context.Users.Add(use);
+            context.SaveChanges();
+            UserRolesMapping rolemap = new UserRolesMapping
+            {
+                UserID = result.ID,
+                RoleID = model.role
+            };
+            context.UserRolesMappings.Add(rolemap);
+            context.SaveChanges();
+            
             return RedirectToAction("Login");
         }
 

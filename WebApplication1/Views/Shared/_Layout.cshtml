@@ -21,10 +21,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @if (User.Identity.IsAuthenticated)
                     {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Create User", "Signup", "Account")</li>
+                            <li>@Html.ActionLink("List Users", "list", "Account")</li>
+                        }
                         <li>@Html.ActionLink("Get Reports", "Index", "Report")</li>
                         @*<li>@Html.ActionLink("Add Employee", "Create", "Employees")</li>*@
                         <li><a>Hello - @User.Identity.Name</a></li>
