@@ -123,6 +123,7 @@ namespace WebApplication1.Controllers
 
         // Creating Static Report Formates
         private List<ReportFormat> GetReportFormat()
+
         {
             try
             {
