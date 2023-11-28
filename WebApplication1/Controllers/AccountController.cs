@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
             using (ProjectContext context = new ProjectContext())
             {
                 bool IsValidUser = context.Users.Any(user => user.UserName.ToLower() ==
-                     model.UserName.ToLower() && user.UserPassword == model.UserPassword);
+                                   model.UserName.ToLower() && user.UserPassword == model.UserPassword);
                 if (IsValidUser)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
@@ -36,8 +36,32 @@ namespace WebApplication1.Controllers
         {
             List<User> users = new List<User>();
             users = context.Users.ToList();
+            //List<Role> roles = new List<Role>();
+            //roles = context.Roles.ToList();
+            List<UserRolesMapping> userRolesMappings = new List<UserRolesMapping>();
+            userRolesMappings = context.UserRolesMappings.ToList();
+
+            List<UserModelWithRoleView> userModelWithRoles = new List<UserModelWithRoleView>();
+            foreach (var item in userRolesMappings)
+            {
+                UserModelWithRoleView obj = new UserModelWithRoleView
+                {
+                    ID= item.ID,
+                    UserName = item.User.UserName,
+                    role = item.Role.RollName
+                };
+                userModelWithRoles.Add(obj);
+            }
+            foreach (var item in users)
+            {
+                foreach (var itemrole in userModelWithRoles)
+                {
+                    if (item.UserName == itemrole.UserName)
+                        itemrole.UserPassword = item.UserPassword;
+                }
+            }
             
-            return View(users);
+            return View(userModelWithRoles);
         }
         public ActionResult Signup()
         {
@@ -66,6 +90,49 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Login");
         }
 
+        public ActionResult Edit(int id)
+        {
+            var result = context.UserRolesMappings.Find(id);
+            var userRole = context.Roles.Find(result.RoleID);
+            var user = context.Users.Find(result.UserID);
+
+            var list = context.Roles.ToList();
+
+            UserModelWithRole obj = new UserModelWithRole
+            {
+                UserName = user.UserName,
+                UserPassword = user.UserPassword,
+                role = userRole.ID
+            };
+
+            ViewBag.roles = new SelectList(list, "ID", "RollName",obj.role);
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserModelWithRole model)
+        {
+
+            
+            var user = context.Users.Where(x => x.UserName.ToLower() == model.UserName.ToLower()).FirstOrDefault();
+            //User use = new User()
+            //{
+            //    UserName = model.UserName,
+            //    UserPassword = model.UserPassword
+            //};
+            user.UserName = model.UserName;
+            user.UserPassword = model.UserPassword;
+            context.SaveChanges();
+
+            var rolesMapping = context.UserRolesMappings.Find(model.ID);
+
+            rolesMapping.UserID = user.ID;
+            rolesMapping.RoleID = model.role;
+            
+            //.UserRolesMappings.update(rolemap);
+            context.SaveChanges();
+
+            return RedirectToAction("Login");
+        }
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

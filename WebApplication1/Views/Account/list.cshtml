@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.User>
+﻿@model IEnumerable<WebApplication1.Models.UserModelWithRoleView>
 
 @{
     ViewBag.Title = "list";
@@ -16,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserPassword)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.role)
         </th>
         <th></th>
     </tr>
@@ -27,6 +30,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserPassword)
+        </td> 
+        <td>
+            @Html.DisplayFor(modelItem => item.role)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
