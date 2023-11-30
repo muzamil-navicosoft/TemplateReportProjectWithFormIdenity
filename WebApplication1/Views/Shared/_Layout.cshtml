@@ -27,9 +27,9 @@
                     {
                         if (User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Create User", "Signup", "Account")</li>
-                            <li>@Html.ActionLink("List Users", "list", "Account")</li>
-                            <li>@Html.ActionLink("Upaid Bills", "unpaid", "Billing")</li>
+                            @*<li>@Html.ActionLink("Create User", "Signup", "Account")</li>*@
+                            <li>@Html.ActionLink("User Managment", "list", "Account")</li>
+                            <li>@Html.ActionLink("UnPaid Bills", "unpaid", "Billing")</li>
                             <li>@Html.ActionLink("Bills History", "index", "Billing")</li>
                         }
                         <li>@Html.ActionLink("Get Reports", "Index", "Report")</li>

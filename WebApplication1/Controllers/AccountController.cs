@@ -87,7 +87,7 @@ namespace WebApplication1.Controllers
             context.UserRolesMappings.Add(rolemap);
             context.SaveChanges();
             
-            return RedirectToAction("Login");
+            return RedirectToAction("list");
         }
 
         public ActionResult Edit(int id)
@@ -131,7 +131,7 @@ namespace WebApplication1.Controllers
             //.UserRolesMappings.update(rolemap);
             context.SaveChanges();
 
-            return RedirectToAction("Login");
+            return RedirectToAction("list");
         }
         public ActionResult Logout()
         {
