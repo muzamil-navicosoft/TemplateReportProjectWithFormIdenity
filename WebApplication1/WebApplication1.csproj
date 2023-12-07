@@ -250,6 +250,8 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\Add.cshtml" />
+    <Content Include="Views\Ticket\ActiveTickets.cshtml" />
+    <Content Include="Views\Ticket\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

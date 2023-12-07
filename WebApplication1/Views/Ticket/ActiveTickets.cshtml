@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<WebApplication1.Models.Ticket>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ActiveTickets";
 }
 
-<h2>Index</h2>
+<h2>ActiveTickets</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,12 +16,12 @@
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Resolution)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            @Html.DisplayNameFor(model => model.Resolution)
+        </th>*@
+        <th>
+            @Html.DisplayName("Status")
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.ClientFormId)
@@ -32,38 +32,44 @@
         <th>
             @Html.DisplayNameFor(model => model.DateReolved)
         </th>
-        @*<th></th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th></th>*@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        @*<td>
+<tr>
+    <td>
+        @Html.ActionLink($"{item.Title}", "Edit", new { item.Id })
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Resolution)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        @*<td>
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.IsActive)
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.ClientFormId)
         </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
+    <td>
+        @Html.DisplayFor(modelItem => item.DateCreated)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateReolved)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Department)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateReolved)
-        </td>
-        @*<td>
+    <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>*@
-    </tr>
+</tr>
 }
 
 </table>

@@ -1,0 +1,150 @@
+﻿@model WebApplication1.Models.Ticket
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Ticket</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Description:</label>
+            <!-- Display old messages as readonly content -->
+            <textarea class="form-control" rows="8" readonly>
+            @Model.Description
+        </textarea>
+
+            <!-- New messages can be added below -->
+            <textarea asp-for="Description" class="form-control" rows="5" id="chat-box" name="message"></textarea>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Resolution, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Resolution, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Resolution, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClientFormId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ClientFormId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ClientFormId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateReolved, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateReolved, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateReolved, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script>
+    // JavaScript for chat box functionality
+    // Example: You can add event listeners to send messages, format text, etc.
+    // Here's a simple example using vanilla JavaScript for sending messages
+    const chatBox = document.getElementById('chat-box');
+    // Geting the Id value here
+    let id = @Model.Id;
+
+
+    chatBox.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13 && event.shiftKey === false) { // Check if Enter key is pressed without Shift key
+            event.preventDefault(); // Prevents adding new line in textarea
+
+            // Send the message logic here
+            const message = chatBox.value.trim(); // Get the message content
+
+            // Example: Sending message to a server via AJAX or performing an action with the message content
+            // You may replace this example with your actual logic to handle the message
+            if (message !== '') {
+                console.log('Sending message:', message); // Example: Log the message
+
+                $.ajax({
+                    type: "POST",
+                    // url: "~/UserForm/updateIsBilledMonthly",
+                    url: '@Url.Action("Edit", "Ticket")',
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        message: message
+                    },
+                    complete: function (result) {
+                        location.reload();
+                        console.log(result)
+                    }
+                });
+                chatBox.value = ''; // Clear the textarea after sending the message
+            }
+        }
+    });
+
+    </script>
+}

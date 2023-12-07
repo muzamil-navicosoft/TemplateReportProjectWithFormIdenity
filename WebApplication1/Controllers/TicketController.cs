@@ -73,6 +73,78 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public ActionResult ActiveTickets()
+        {
+            var result = GetOpenTickets();
+            List<Ticket> listName = result.AsEnumerable().Select(m => new Ticket()
+            {
+                Id = m.Field<int>("Id"),
+                Title = m.Field<string>("Title"),
+                Description = m.Field<string>("Description"),
+                Resolution = m.Field<string>("Resolution"),
+                IsActive = m.Field<bool>("IsActive"),
+                DateCreated = m.Field<DateTime>("DateCreated"),
+                DateReolved = m.Field<DateTime?>("DateReolved"),
+                ClientFormId = m.Field<int>("ClientFormId")
+
+            }).ToList();
+
+            return View(listName);
+        }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var result = GetSpecificTicket(id);
+            List<Ticket> listName = result.AsEnumerable().Select(m => new Ticket()
+            {
+                Id = m.Field<int>("Id"),
+                Title = m.Field<string>("Title"),
+                Description = m.Field<string>("Description"),
+                Resolution = m.Field<string>("Resolution"),
+                IsActive = m.Field<bool>("IsActive"),
+                DateCreated = m.Field<DateTime>("DateCreated"),
+                DateReolved = m.Field<DateTime?>("DateReolved"),
+                ClientFormId = m.Field<int>("ClientFormId")
+
+            }).ToList();
+
+            Ticket obj = new Ticket();
+            foreach (var item in listName)
+            {
+                obj.Id = item.Id;
+                obj.Title = item.Title;
+                obj.Description = item.Description;
+                obj.Resolution = item.Resolution;
+                obj.IsActive = item.IsActive;
+                obj.DateCreated = item.DateCreated;
+                obj.DateReolved = item.DateReolved;
+                obj.ClientFormId = item.ClientFormId;
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult Edit(int id, string message)
+        {
+
+            try
+            {
+
+                UpdateTicket(id, message);
+
+                return RedirectToAction("Edit", new { id });
+               
+              
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        #region services
+
         private DataTable GetAllTickets()
         {
             DataTable dt = new DataTable();
@@ -81,6 +153,33 @@ namespace WebApplication1.Controllers
             {
                 sql.Open();
                 SqlCommand cmd = new SqlCommand("select * from Ticket where ClientFormId = 11", sql);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+        private DataTable GetOpenTickets()
+        {
+            DataTable dt = new DataTable();
+            string con = ConfigurationManager.AppSettings["connectionString"].ToString();
+            using (SqlConnection sql = new SqlConnection(con))
+            {
+                sql.Open();
+                SqlCommand cmd = new SqlCommand("select * from Ticket where ClientFormId = 11 And IsActive = 1", sql);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+        private DataTable GetSpecificTicket(int id)
+        {
+
+            DataTable dt = new DataTable();
+            string con = ConfigurationManager.AppSettings["connectionString"].ToString();
+            using (SqlConnection sql = new SqlConnection(con))
+            {
+                sql.Open();
+                SqlCommand cmd = new SqlCommand($"select * from Ticket where ClientFormId = 11 And Id = {id} And IsActive = 1", sql);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
             }
@@ -109,5 +208,34 @@ namespace WebApplication1.Controllers
             }
           
         }
+        private void UpdateTicket(int id, string message)
+        {
+            DataTable dt = new DataTable();
+            string con = ConfigurationManager.AppSettings["connectionString"].ToString();
+            using (SqlConnection sql = new SqlConnection(con))
+            {
+                sql.Open();
+
+                string domain = Request.Url.Host +
+                           (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+
+                string query = "Update Ticket set Description = @des + Description Where Id = @id";
+
+                using (var command = new SqlCommand(query, sql))
+                {
+                    command.Parameters.AddWithValue("@des", domain +"\n" +message + "\n");
+                    command.Parameters.AddWithValue("@Id", id);
+                
+                    command.ExecuteNonQuery();
+                }
+
+            }
+
+        }
+
+
+        #endregion
     }
+
+
 }
